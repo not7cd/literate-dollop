@@ -1,6 +1,7 @@
-authors = ["Norbert Szulc <norbert@not7cd.net>"]
 name = "LiterateDollop"
 uuid = "297343f6-81be-11ea-05ef-bb11bdbbba22"
+authors = ["Norbert Szulc <norbert@not7cd.net>"]
 version = "0.1.0"
 
 [deps]
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"

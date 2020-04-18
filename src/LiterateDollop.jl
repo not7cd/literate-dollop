@@ -1,4 +1,5 @@
 module LiterateDollop
+export f
 
 f(x) = x + 1;
 
