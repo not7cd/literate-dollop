@@ -1,3 +1,3 @@
 # literate-dollop
 
-Implementation of quadratic interpolation method
+Implementation of golden ratio method

@@ -1,25 +1,30 @@
 module LiterateDollop
-export f
+export optfun
 
-fcdm1(f, x; dx=1e-4) = (f(x+dx) - f(x-dx))/2dx
+ρ = (sqrt(5) - 1)/2
 
-fcdm2(f, x; dx=1e-4) = (f(x+dx) - 2f(x) + f(x-dx))/dx^2
-
-function build_q(f, xk)
-    q(x) = f(xk) + fcdm1(f, xk)*(x-xk) + 0.5 * fcdm2(f, xk)*(x-xk)^2
-    return q
-end
+fw1(a, b) = a + (1 - ρ)*(b - a)
+fw2(a, b) = b + (1 - ρ)*(b - a)
 
 "for simplicity x^(k-1) is xk0 and xk1 is x^(k)"
-function optfun(f, x0, x1; ϵ=1e-5)
+function optfun(f, a, b; ϵ=1e-5)
+    @assert b > a
+    k = 1
+    w1 = fw1(a, b)
+    w2 = fw2(a, b)
 
-    while abs(gk) >= ϵ
-        xk0 = xk1
-        xk1 = xk2
-        xk2 = xk1 - (xk1 - xk0) / (g(xk1) - g(gk0)) * g(xk1)
-        gk2 = g(xk2)
+    while b - a < ϵ
+        if f(w1) < f(w2)
+            b = w2
+            w2 = w1
+            w1 = fw2(a, b)
+        else
+            a = w1
+            w1 = w2
+            w2 = fw2(a, b)
+        end
     end
-
+    return a
 end
 
 end # module
