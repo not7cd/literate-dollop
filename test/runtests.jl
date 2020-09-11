@@ -4,9 +4,10 @@ using LiterateDollop, Test
 
 @testset "optfun" begin
     f1(x) = x^2
-    f2(x) = (x+1)^4 + 10
+    f2(x) = (x-1)^2*10 + 10
     f3(x) = (x+10)^2 - 10
-    @test optfun(f1, -3, 10) - 0 < ϵ
-    @test optfun(f2, -3, 10) - 1 < ϵ
-    @test optfun(f3, 3, 30) - 10 < ϵ
+
+    @test isapprox(optfun(f1, -3, 10), 0, atol=ϵ)
+    @test isapprox(optfun(f2, -3, 10), 1, atol=ϵ)
+    @test isapprox(optfun(f3, -30, 30), -10, atol=ϵ)
 end
